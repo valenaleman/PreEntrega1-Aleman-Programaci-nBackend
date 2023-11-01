@@ -1,14 +1,23 @@
-import express, { Express } from "express";
-const app = Express();
-const port = 3000;
+import express from 'express';
 
-app.use(express.urlencoded({extends:true }));
+const app = express();
+const port = 8080;
 
+app.get('/success', (req, res) => {
+    res.status(200).send('Solicitud exitosa');
+});
 
-let users = [
-    { id: 1, name: 'Babysec - Ultrasec', price: 3200, content: 60 },
-    { id: 2, name: 'Pampers - Premium care, piel delicada', price: 5900, content: 58},
-    { id: 3, name: 'Pampers - Premium care, recién nacido hipoalergénico', price: 2420, content: 36},
-]
+app.get('/persona', (req, res) => {
+    const persona = {
+        nombre: 'Valen',
+        apellido: 'A.',
+        edad: 20,
+        correo: 'valentinaaleman07@gmail.com'
+    };
 
-app.get('')
+    res.status(200).json(persona);
+});
+
+app.listen(port, () => {
+    console.log('El servidor express está escuchando en el puerto ${port}');
+});
