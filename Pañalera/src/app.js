@@ -1,12 +1,42 @@
 import express from 'express';
+import handlesbar from 'express-handlebars';
+import __dirname from './utils.js';
+
 
 const app = express();
 const port = 8080;
 
-app.listen(port, () => {
-    console.log('El servidor express está escuchando en el puerto ${port}');
+app.get('/persona', (req, res) => {
+    const persona = {
+        nombre: 'Valen',
+        apellido: 'A.',
+        edad: 20,
+        correo: 'valentinaaleman07@gmail.com'
+    };
+
+    res.status(200).json(persona);
 });
 
-app.get('/success', (req, res) => {
-    res.status(400).send('Solicitud exitosa');
+app.listen(port, () => {
+    console.log(`El servidor express está escuchando en el puerto ${port}`);
+});
+
+app.engine('handlebars', handlesbar.engine());
+
+app.set('views',`${__dirname}/views`);
+app.set('view engine', 'handlebars');
+
+app.use(express.static(__dirname+'/public'));
+
+app.get('/', (req, res)=>{
+    let testUser ={
+        name:"Valen",
+        last_name: "Aleman"
+    }
+
+    res.render('index',testUser);
+});
+
+app.listen(port, () => {
+    console.log(`El servidor express está escuchando en el puerto ${port}`);
 });
