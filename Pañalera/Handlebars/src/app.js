@@ -44,5 +44,5 @@ app.listen(port, () => {
     console.log(`El servidor express está escuchando en el puerto ${port}`);
 });
 
-app.use('/api/users', router);
-app.use('/api/view', router);
+app.use('/api/users', userRouter);
+app.use('/api/view', viewRouter);
