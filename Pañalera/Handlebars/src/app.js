@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import handlesbar from 'express-handlebars';
 import __dirname from './utils.js';
 
@@ -22,6 +22,11 @@ app.engine('handlebars', handlesbar.engine());
 app.set('views',`${__dirname}/views`);
 app.set('view engine', 'handlebars');
 
+app.use(express.static(__dirname + '/public'));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(express.static(__dirname+'/public'));
 
 app.get('/', (req, res)=>{
@@ -36,3 +41,6 @@ app.get('/', (req, res)=>{
 app.listen(port, () => {
     console.log(`El servidor express está escuchando en el puerto ${port}`);
 });
+
+app.use('/api/users', router);
+app.use('/api/view', router);
