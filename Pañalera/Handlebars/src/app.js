@@ -17,10 +17,6 @@ app.get('/persona', (req, res) => {
     res.status(200).json(persona);
 });
 
-app.listen(port, () => {
-    console.log(`El servidor express está escuchando en el puerto ${port}`);
-});
-
 app.engine('handlebars', handlesbar.engine());
 
 app.set('views',`${__dirname}/views`);
